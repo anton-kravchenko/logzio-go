@@ -20,7 +20,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	"github.com/beeker1121/goque"
-	"github.com/logzio/logzio-go/inMemoryQueue"
+	"github.com/anton-kravchenko/logzio-go/inMemoryQueue"
 	"github.com/shirou/gopsutil/v3/disk"
 	"io"
 	"io/ioutil"

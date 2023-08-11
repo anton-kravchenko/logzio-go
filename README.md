@@ -9,7 +9,7 @@ go 1.x
 
 ## Installation
 ```shell
-$ go get -u github.com/logzio/logzio-go
+$ go get -u github.com/anton-kravchenko/logzio-go
 ```
 Logzio golang api client offers two queue implementations that you can use:
 ## Disk queue
@@ -29,7 +29,7 @@ package main
 
 import (
   "fmt"
-  "github.com/logzio/logzio-go"
+  "github.com/anton-kravchenko/logzio-go"
   "os"
   "time"
 )
@@ -63,7 +63,7 @@ package main
 
 import (
   "fmt"
-  "github.com/logzio/logzio-go"
+  "github.com/anton-kravchenko/logzio-go"
   "os"
   "time"
 )
@@ -87,7 +87,7 @@ func main() {
      panic(err)
   }
 
-  l.Stop() 
+  l.Stop()
 }
 ```
 
@@ -120,7 +120,7 @@ func main() {
   SetinMemoryCapacity(500),
   SetlogCountLimit(6000000),
   )`
-  
+
 ## Data compression
 All bulks are compressed with gzip by default to disable compressing initialize the client with `SetCompress(false)`:
 ```go
@@ -158,7 +158,7 @@ This project is licensed under the Apache License - see the [LICENSE](LICENSE) f
 * [logzio-java-sender](https://github.com/logzio/logzio-java-sender)
 
 
-## Changelog 
+## Changelog
 - v1.0.5
     - Change `token` query parameter to optional for generic use
     - Changed logging levels
