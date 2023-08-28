@@ -404,7 +404,7 @@ func (l *LogzioSender) dequeueUpToMaxBatchSize() {
 		err error
 	)
 	for l.buf.Len() < maxSize && err == nil {
-		item, err := l.queue.Dequeue()
+		item, _ := l.queue.Dequeue()
 
 		if item != nil {
 			// NewLine is appended tp item.Value
