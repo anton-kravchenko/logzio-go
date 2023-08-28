@@ -294,7 +294,7 @@ func (l *LogzioSender) makeHttpRequest(data bytes.Buffer, attempt int, c bool) i
 	if c {
 		req.Header.Add("Content-Encoding", "gzip")
 	}
-	l.debugLog("sender: Sending bulk of %v bytes\n", l.buf.Len())
+
 	resp, err := l.httpClient.Do(req)
 	if err != nil {
 		l.debugLog("sender: Error sending logs to %s %s\n", l.url, err)
@@ -307,7 +307,11 @@ func (l *LogzioSender) makeHttpRequest(data bytes.Buffer, attempt int, c bool) i
 	if err != nil {
 		l.debugLog("sender: Error reading response body: %v", err)
 	}
-	l.debugLog("sender: Response status code: %v \n", statusCode)
+
+	if statusCode != 200 {
+		l.debugLog("sender: Response status code: %v \n", statusCode)
+	}
+
 	if statusCode == 200 {
 		l.droppedLogs = 0
 	}
@@ -401,9 +405,7 @@ func (l *LogzioSender) dequeueUpToMaxBatchSize() {
 	)
 	for l.buf.Len() < maxSize && err == nil {
 		item, err := l.queue.Dequeue()
-		if err != nil {
-			l.debugLog("sender: queue state: %s\n", err)
-		}
+
 		if item != nil {
 			// NewLine is appended tp item.Value
 			if len(item.Value)+l.buf.Len()+1 >= maxSize {
